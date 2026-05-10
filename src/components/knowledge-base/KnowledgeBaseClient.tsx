@@ -1,31 +1,13 @@
 "use client";
-
-import { useState } from "react";
 import { UploadDocumentModal } from "@/components/knowledge-base/UploadDocumentModal";
+import useKnowledgeBase from "@/hooks/knowledge-base/useKnowledgeBase";
 
-interface Document {
-  id: number;
-  name: string;
-  type: string;
-  size: string;
-  updated: string;
-}
+export default function KnowledgeBaseClient() {
+  const { documents, isUploadModalOpen, setIsUploadModalOpen } = useKnowledgeBase();
 
-export default function KnowledgeBaseClient({
-  documents,
-}: {
-  documents: Document[];
-}) {
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900">Knowledge Base</h1>
-          <p className="text-slate-500 mt-1">
-            Manage documents that feed the AI assistant.
-          </p>
-        </div>
+      <div className="flex justify-end ">
         <button
           onClick={() => setIsUploadModalOpen(true)}
           className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition-colors flex items-center gap-2"
@@ -49,49 +31,51 @@ export default function KnowledgeBaseClient({
         </button>
       </div>
 
-      <div className="bg-white border rounded-lg shadow-sm overflow-hidden text-sm mt-8">
-        <div className="grid grid-cols-12 bg-slate-50 border-b p-4 font-medium text-slate-600">
-          <div className="col-span-6 md:col-span-5">Document Name</div>
-          <div className="col-span-3 hidden md:block">Type</div>
-          <div className="col-span-2 hidden md:block">Size</div>
-          <div className="col-span-6 md:col-span-2 text-right md:text-left">
-            Last Updated
-          </div>
-        </div>
-        <div className="divide-y">
-          {documents.map((doc) => (
-            <div
-              key={doc.id}
-              className="grid grid-cols-12 p-4 items-center hover:bg-slate-50 transition-colors"
-            >
-              <div className="col-span-6 md:col-span-5 font-medium text-slate-900 flex items-center gap-3">
-                <svg
-                  className="text-indigo-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                </svg>
-                {doc.name}
-              </div>
-              <div className="col-span-3 hidden md:block text-slate-500">
-                {doc.type}
-              </div>
-              <div className="col-span-2 hidden md:block text-slate-500">
-                {doc.size}
-              </div>
-              <div className="col-span-6 md:col-span-2 text-right md:text-left text-slate-500">
-                {doc.updated}
-              </div>
+      <div className="bg-white border rounded-lg shadow-sm overflow-hidden text-sm ">
+        <div>
+          <div className="grid grid-cols-12 bg-slate-50 border-b p-4 font-medium text-slate-600">
+            <div className="col-span-6 md:col-span-5">Document Name</div>
+            <div className="col-span-3 hidden md:block">Type</div>
+            <div className="col-span-2 hidden md:block">Size</div>
+            <div className="col-span-6 md:col-span-2 text-right md:text-left">
+              Last Updated
             </div>
-          ))}
+          </div>
+          <div className="divide-y">
+            {documents.map((doc) => (
+              <div
+                key={doc.id}
+                className="grid grid-cols-12 p-4 items-center hover:bg-slate-50 transition-colors"
+              >
+                <div className="col-span-6 md:col-span-5 font-medium text-slate-900 flex items-center gap-3">
+                  <svg
+                    className="text-indigo-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                  </svg>
+                  {doc.name}
+                </div>
+                <div className="col-span-3 hidden md:block text-slate-500">
+                  {doc.type}
+                </div>
+                <div className="col-span-2 hidden md:block text-slate-500">
+                  {doc.size}
+                </div>
+                <div className="col-span-6 md:col-span-2 text-right md:text-left text-slate-500">
+                  {doc.updated}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <UploadDocumentModal
