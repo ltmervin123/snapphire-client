@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import { Users, Briefcase, Zap, Brain, TrendingUp, Clock } from "lucide-react";
 
 export default function AnalyticsDashboardPage() {
@@ -80,7 +80,7 @@ export default function AnalyticsDashboardPage() {
             {trendData.map((item, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center w-full group"
+                className="flex flex-col items-center justify-end w-full h-full group"
               >
                 <div
                   className="w-full bg-blue-100 hover:bg-blue-500 dark:bg-blue-950 dark:hover:bg-blue-600 transition-all rounded-t-md relative"
